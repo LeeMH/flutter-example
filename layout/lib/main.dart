@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:layout/screens/column_demo.dart';
 import 'package:layout/screens/main_screen.dart';
 import 'package:layout/screens/row_demo.dart';
 
@@ -15,8 +16,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       initialRoute: '/',
       routes: {
-        '/': (context) => MainScreen(),
-        '/row': (context) => RowDemo(),
+        '/': (context) => const MainScreen(),
+        '/row': (context) => const RowDemo(),
+        '/column': (context) => const ColumnDemo(),
       },
     );
   }

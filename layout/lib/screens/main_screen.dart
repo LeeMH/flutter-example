@@ -17,7 +17,16 @@ class MainScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.pushNamed(context, '/row');
               },
-              child: Text('Row Demo'),
+              child: const Text('Row Demo'),
+            ),
+
+            //--------------------------------------------
+            const SizedBox(height: 10),
+            TextButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/column');
+              },
+              child: const Text('Column Demo'),
             ),
           ],
         ),
