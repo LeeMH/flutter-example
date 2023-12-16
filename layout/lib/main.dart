@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:layout/screens/column_demo.dart';
 import 'package:layout/screens/main_screen.dart';
+import 'package:layout/screens/row/column_align_demo.dart';
 import 'package:layout/screens/row/row_align_demo.dart';
 import 'package:layout/screens/row_demo.dart';
 
@@ -19,9 +20,10 @@ class MyApp extends StatelessWidget {
       initialRoute: '/home',
       routes: {
         '/home': (context) => const MainScreen(),
-        '/row': (context) => const RowDemo(),
-        '/row/align': (context) => const RowAlignDemo(),
-        '/column': (context) => const ColumnDemo(),
+        '/Row': (context) => const RowDemo(),
+        '/Row/align': (context) => const RowAlignDemo(),
+        '/Column': (context) => const ColumnDemo(),
+        '/Column/align': (context) => const ColumnAlignDemo(),
       },
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(

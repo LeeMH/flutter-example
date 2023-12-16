@@ -6,25 +6,22 @@ class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Layout Demo'),
-      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            TextButton(
+            ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/row');
+                Navigator.pushNamed(context, '/Row');
               },
               child: const Text('Row Demo'),
             ),
 
             //--------------------------------------------
             const SizedBox(height: 10),
-            TextButton(
+            ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/column');
+                Navigator.pushNamed(context, '/Column');
               },
               child: const Text('Column Demo'),
             ),

@@ -3,22 +3,91 @@ import 'package:flutter/material.dart';
 class ColumnDemo extends StatelessWidget {
   const ColumnDemo({super.key});
 
-  final String demoTarget = 'Column';
-
   @override
   Widget build(BuildContext context) {
+    const String demoTarget = 'Column';
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('$demoTarget Demo'),
+        title: const Text('$demoTarget Demo'),
       ),
-      body: Container(
-        color: Colors.yellow,
+      body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Image.asset('images/pic1.jpg'),
-            Image.asset('images/pic2.jpg'),
-            Image.asset('images/pic3.jpg'),
+            const SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: () => {
+                Navigator.pushNamed(
+                  context,
+                  '/$demoTarget/align',
+                  arguments: MainAxisAlignment.start,
+                )
+              },
+              child: const Text('$demoTarget with MainAxisAlignment.start'),
+            ),
+            ///////////////////////////////
+            const SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: () => {
+                Navigator.pushNamed(
+                  context,
+                  '/$demoTarget/align',
+                  arguments: MainAxisAlignment.center,
+                )
+              },
+              child: const Text('$demoTarget with MainAxisAlignment.center'),
+            ),
+            ///////////////////////////////
+            const SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: () => {
+                Navigator.pushNamed(
+                  context,
+                  '/$demoTarget/align',
+                  arguments: MainAxisAlignment.end,
+                )
+              },
+              child: const Text('$demoTarget with MainAxisAlignment.end'),
+            ),
+            ///////////////////////////////
+            const SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: () => {
+                Navigator.pushNamed(
+                  context,
+                  '/$demoTarget/align',
+                  arguments: MainAxisAlignment.spaceAround,
+                )
+              },
+              child:
+                  const Text('$demoTarget with MainAxisAlignment.spaceAround'),
+            ),
+            ///////////////////////////////
+            const SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: () => {
+                Navigator.pushNamed(
+                  context,
+                  '/$demoTarget/align',
+                  arguments: MainAxisAlignment.spaceBetween,
+                )
+              },
+              child:
+                  const Text('$demoTarget with MainAxisAlignment.spaceBetween'),
+            ),
+            ///////////////////////////////
+            const SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: () => {
+                Navigator.pushNamed(
+                  context,
+                  '/$demoTarget/align',
+                  arguments: MainAxisAlignment.spaceEvenly,
+                )
+              },
+              child:
+                  const Text('$demoTarget with MainAxisAlignment.spaceEvenly'),
+            ),
           ],
         ),
       ),

@@ -20,13 +20,16 @@ class RowAlignDemo extends StatelessWidget {
             const SizedBox(height: 30),
             Text(alignment.toString()),
             const SizedBox(height: 10),
-            Row(
-              mainAxisAlignment: alignment,
-              children: [
-                Image.asset('images/pic1.jpg'),
-                Image.asset('images/pic2.jpg'),
-                Image.asset('images/pic3.jpg'),
-              ],
+            Container(
+              color: Colors.yellow,
+              child: Row(
+                mainAxisAlignment: alignment,
+                children: [
+                  Image.asset('images/pic1.jpg'),
+                  Image.asset('images/pic2.jpg'),
+                  Image.asset('images/pic3.jpg'),
+                ],
+              ),
             )
           ],
         ),
