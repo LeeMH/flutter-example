@@ -3,112 +3,88 @@ import 'package:flutter/material.dart';
 class RowDemo extends StatelessWidget {
   const RowDemo({super.key});
 
-  final String demoTarget = 'Row';
-
   @override
   Widget build(BuildContext context) {
+    const String demoTarget = 'Row';
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('$demoTarget Demo'),
+        title: const Text('$demoTarget Demo'),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Text('$demoTarget with MainAxisAlignment.spaceEvenly'),
-            const SizedBox(height: 10),
-            Container(
-              color: Colors.yellow,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Image.asset('images/pic1.jpg'),
-                  Image.asset('images/pic2.jpg'),
-                  Image.asset('images/pic3.jpg'),
-                ],
-              ),
-            ),
-
-            //--------------------------------------------
-            const SizedBox(height: 10),
-            Text('$demoTarget with MainAxisAlignment.spaceBetween'),
-            const SizedBox(height: 10),
-            Container(
-              color: Colors.yellow,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Image.asset('images/pic1.jpg'),
-                  Image.asset('images/pic2.jpg'),
-                  Image.asset('images/pic3.jpg'),
-                ],
-              ),
-            ),
-
-            //--------------------------------------------
-            const SizedBox(height: 10),
-            Text('$demoTarget with MainAxisAlignment.spaceAround'),
-            const SizedBox(height: 10),
-            Container(
-              color: Colors.yellow,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Image.asset('images/pic1.jpg'),
-                  Image.asset('images/pic2.jpg'),
-                  Image.asset('images/pic3.jpg'),
-                ],
-              ),
-            ),
-
-            //--------------------------------------------
-            const SizedBox(height: 10),
-            Text('$demoTarget with MainAxisAlignment.start'),
-            const SizedBox(height: 10),
-            Container(
-              color: Colors.yellow,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Image.asset('images/pic1.jpg'),
-                  Image.asset('images/pic2.jpg'),
-                  Image.asset('images/pic3.jpg'),
-                ],
-              ),
-            ),
-
-            //--------------------------------------------
-            const SizedBox(height: 10),
-            Text('$demoTarget with MainAxisAlignment.end'),
-            const SizedBox(height: 10),
-            Container(
-              color: Colors.yellow,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Image.asset('images/pic1.jpg'),
-                  Image.asset('images/pic2.jpg'),
-                  Image.asset('images/pic3.jpg'),
-                ],
-              ),
-            ),
-
-            //--------------------------------------------
-            const SizedBox(height: 10),
-            Text('$demoTarget with MainAxisAlignment.center'),
-            const SizedBox(height: 10),
-            Container(
-              color: Colors.yellow,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset('images/pic1.jpg'),
-                  Image.asset('images/pic2.jpg'),
-                  Image.asset('images/pic3.jpg'),
-                ],
-              ),
-            ),
-          ],
-        ),
+      body: Column(
+        children: [
+          const SizedBox(height: 10),
+          TextButton(
+            onPressed: () => {
+              Navigator.pushNamed(
+                context,
+                '/row/align',
+                arguments: MainAxisAlignment.start,
+              )
+            },
+            child: const Text('Row with MainAxisAlignment.start'),
+          ),
+          ///////////////////////////////
+          const SizedBox(height: 10),
+          TextButton(
+            onPressed: () => {
+              Navigator.pushNamed(
+                context,
+                '/row/align',
+                arguments: MainAxisAlignment.center,
+              )
+            },
+            child: const Text('Row with MainAxisAlignment.center'),
+          ),
+          ///////////////////////////////
+          const SizedBox(height: 10),
+          TextButton(
+            onPressed: () => {
+              Navigator.pushNamed(
+                context,
+                '/row/align',
+                arguments: MainAxisAlignment.end,
+              )
+            },
+            child: const Text('Row with MainAxisAlignment.end'),
+          ),
+          ///////////////////////////////
+          const SizedBox(height: 10),
+          TextButton(
+            onPressed: () => {
+              Navigator.pushNamed(
+                context,
+                '/row/align',
+                arguments: MainAxisAlignment.spaceAround,
+              )
+            },
+            child: const Text('Row with MainAxisAlignment.spaceAround'),
+          ),
+          ///////////////////////////////
+          const SizedBox(height: 10),
+          TextButton(
+            onPressed: () => {
+              Navigator.pushNamed(
+                context,
+                '/row/align',
+                arguments: MainAxisAlignment.spaceBetween,
+              )
+            },
+            child: const Text('Row with MainAxisAlignment.spaceBetween'),
+          ),
+          ///////////////////////////////
+          const SizedBox(height: 10),
+          TextButton(
+            onPressed: () => {
+              Navigator.pushNamed(
+                context,
+                '/row/align',
+                arguments: MainAxisAlignment.spaceEvenly,
+              )
+            },
+            child: const Text('Row with MainAxisAlignment.spaceEvenly'),
+          ),
+        ],
       ),
     );
   }
