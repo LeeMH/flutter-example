@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:layout/screens/column_demo.dart';
 import 'package:layout/screens/main_screen.dart';
-import 'package:layout/screens/row/column_align_demo.dart';
-import 'package:layout/screens/row/row_align_demo.dart';
+import 'package:layout/screens/sub/column_align_demo.dart';
+import 'package:layout/screens/sub/layout_example_demo.dart';
+import 'package:layout/screens/sub/row_align_demo.dart';
 import 'package:layout/screens/row_demo.dart';
 
 void main() {
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
         '/Row/align': (context) => const RowAlignDemo(),
         '/Column': (context) => const ColumnDemo(),
         '/Column/align': (context) => const ColumnAlignDemo(),
+        '/Layout/example': (context) => const LayoutExampleDemo(),
       },
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(

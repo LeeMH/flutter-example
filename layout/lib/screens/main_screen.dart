@@ -25,6 +25,15 @@ class MainScreen extends StatelessWidget {
               },
               child: const Text('Column Demo'),
             ),
+
+            //--------------------------------------------
+            const SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/Layout/example');
+              },
+              child: const Text('Layout Example Demo'),
+            ),
           ],
         ),
       ),
