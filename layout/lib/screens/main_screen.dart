@@ -34,6 +34,30 @@ class MainScreen extends StatelessWidget {
               },
               child: const Text('Layout Example Demo'),
             ),
+            //--------------------------------------------
+            const SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/ListView/example1');
+              },
+              child: const Text('ListView Example1 Demo'),
+            ),
+            //--------------------------------------------
+            const SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/ListView/example2');
+              },
+              child: const Text('ListView Example2 Demo'),
+            ),
+            //--------------------------------------------
+            const SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/GridView/example');
+              },
+              child: const Text('GridView Example Demo'),
+            ),
           ],
         ),
       ),
