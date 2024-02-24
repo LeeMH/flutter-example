@@ -1,3 +1,4 @@
+import 'package:carrot_market/repository/contents_repository.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -12,7 +13,7 @@ class HomeWidget extends StatefulWidget {
 }
 
 class _HomeWidgetState extends State<HomeWidget> {
-  List<Map<String, String>> datas = [];
+  ContentsRepository contentsRepository = ContentsRepository();
   String _currentLocation = "ara";
   final Map<String, String> locationMap = {
     "ara": "아라동",
@@ -23,78 +24,6 @@ class _HomeWidgetState extends State<HomeWidget> {
   @override
   void initState() {
     super.initState();
-    datas = [
-      {
-        "image": "assets/images/ara-1.jpg",
-        "title": "네메시스 축구화275",
-        "location": "제주 제주시 아라동",
-        "price": "30000",
-        "likes": "2"
-      },
-      {
-        "image": "assets/images/ara-2.jpg",
-        "title": "LA갈비 5kg팔아요~",
-        "location": "제주 제주시 아라동",
-        "price": "100000",
-        "likes": "5"
-      },
-      {
-        "image": "assets/images/ara-3.jpg",
-        "title": "치약팝니다",
-        "location": "제주 제주시 아라동",
-        "price": "5000",
-        "likes": "0"
-      },
-      {
-        "image": "assets/images/ara-4.jpg",
-        "title": "[풀박스]맥북프로16인치 터치바 스페이스그레이",
-        "location": "제주 제주시 아라동",
-        "price": "2500000",
-        "likes": "6"
-      },
-      {
-        "image": "assets/images/ara-5.jpg",
-        "title": "디월트존기임팩",
-        "location": "제주 제주시 아라동",
-        "price": "150000",
-        "likes": "2"
-      },
-      {
-        "image": "assets/images/ara-6.jpg",
-        "title": "갤럭시s10",
-        "location": "제주 제주시 아라동",
-        "price": "180000",
-        "likes": "2"
-      },
-      {
-        "image": "assets/images/ara-7.jpg",
-        "title": "선반",
-        "location": "제주 제주시 아라동",
-        "price": "15000",
-        "likes": "2"
-      },
-      {
-        "image": "assets/images/ara-8.jpg",
-        "title": "냉장 쇼케이스",
-        "location": "제주 제주시 아라동",
-        "price": "80000",
-        "likes": "3"
-      },
-      {
-        "image": "assets/images/ara-9.jpg",
-        "title": "대우 미니냉장고",
-        "location": "제주 제주시 아라동",
-        "price": "30000",
-        "likes": "3"
-      },
-      {
-        "image": "assets/images/ara-10.jpg",
-        "title": "멜킨스 풀업 턱걸이 판매합니다.",
-        "location": "제주 제주시 아라동",
-        "price": "50000",
-        "likes": "7"
-      },
-    ];
   }
 
   PreferredSizeWidget _appBar() {
@@ -171,94 +100,128 @@ class _HomeWidgetState extends State<HomeWidget> {
 
   final oCcy = NumberFormat("#,###", "ko_KR");
   String currencyFormat(String price) {
-    return '${oCcy.format(int.parse(price))}원';
+    var number = int.tryParse(price);
+    if (number == null) {
+      return price;
+    } else {
+      return '${oCcy.format(number)}원';
+    }
+  }
+
+  Future _loadContents() {
+    return contentsRepository.loadContentsFromLocation(_currentLocation);
   }
 
   Widget _bodyWidget() {
-    return ListView.separated(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 10,
-      ),
-      itemBuilder: (BuildContext context, int index) {
-        return Container(
+    return FutureBuilder(
+      future: _loadContents(),
+      builder: (buildContext, snapshot) {
+        if (snapshot.connectionState != ConnectionState.done) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+
+        if (snapshot.hasError) {
+          return const Center(
+            child: Text("데이터 오류"),
+          );
+        }
+
+        if (snapshot.hasData == false) {
+          return const Center(
+            child: Text("데이터 없음"),
+          );
+        }
+
+        List<Map<String, String>> datas =
+            snapshot.data as List<Map<String, String>>;
+        return ListView.separated(
           padding: const EdgeInsets.symmetric(
-            vertical: 10,
+            horizontal: 10,
           ),
-          child: Row(
-            children: [
-              ClipRRect(
-                borderRadius: const BorderRadius.all(Radius.circular(10)),
-                child: Image.asset(
-                  datas[index]["image"]!,
-                  width: 100,
-                  height: 100,
-                  fit: BoxFit.cover,
-                ),
+          itemBuilder: (BuildContext context, int index) {
+            return Container(
+              padding: const EdgeInsets.symmetric(
+                vertical: 10,
               ),
-              const SizedBox(
-                width: 10,
-              ),
-              Expanded(
-                child: Container(
-                  height: 100,
-                  padding: const EdgeInsets.only(
-                    left: 10,
+              child: Row(
+                children: [
+                  ClipRRect(
+                    borderRadius: const BorderRadius.all(Radius.circular(10)),
+                    child: Image.asset(
+                      datas[index]["image"]!,
+                      width: 100,
+                      height: 100,
+                      fit: BoxFit.cover,
+                    ),
                   ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        datas[index]["title"]!,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          fontSize: 15,
-                        ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Expanded(
+                    child: Container(
+                      height: 100,
+                      padding: const EdgeInsets.only(
+                        left: 10,
                       ),
-                      Text(
-                        datas[index]["location"]!,
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: Colors.black.withOpacity(0.3),
-                        ),
-                      ),
-                      Text(
-                        currencyFormat(datas[index]["price"]!),
-                        style: const TextStyle(fontWeight: FontWeight.w500),
-                      ),
-                      Expanded(
-                        child: Container(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              SvgPicture.asset(
-                                "assets/svg/heart_off.svg",
-                                width: 13,
-                                height: 13,
-                              ),
-                              const SizedBox(
-                                width: 5,
-                              ),
-                              Text(datas[index]["likes"]!),
-                            ],
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            datas[index]["title"]!,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                              fontSize: 15,
+                            ),
                           ),
-                        ),
+                          Text(
+                            datas[index]["location"]!,
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Colors.black.withOpacity(0.3),
+                            ),
+                          ),
+                          Text(
+                            currencyFormat(datas[index]["price"]!),
+                            style: const TextStyle(fontWeight: FontWeight.w500),
+                          ),
+                          Expanded(
+                            child: Container(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  SvgPicture.asset(
+                                    "assets/svg/heart_off.svg",
+                                    width: 13,
+                                    height: 13,
+                                  ),
+                                  const SizedBox(
+                                    width: 5,
+                                  ),
+                                  Text(datas[index]["likes"]!),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
+                    ),
                   ),
-                ),
+                ],
               ),
-            ],
-          ),
+            );
+          },
+          separatorBuilder: (BuildContext context, int index) {
+            return Container(
+              height: 1,
+              color: Colors.black.withOpacity(0.5),
+            );
+          },
+          itemCount: 10,
         );
       },
-      separatorBuilder: (BuildContext context, int index) {
-        return Container(
-          height: 1,
-          color: Colors.black.withOpacity(0.5),
-        );
-      },
-      itemCount: 10,
     );
   }
 
