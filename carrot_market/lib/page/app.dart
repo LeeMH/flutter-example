@@ -23,7 +23,7 @@ class _AppState extends State<App> {
   Widget _buildBodyWidget(int index) {
     switch (index) {
       case 0:
-        return const HomeWidget();
+        return const Home();
       case 1:
         return Container(
           child: const Center(
