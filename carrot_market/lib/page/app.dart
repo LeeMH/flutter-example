@@ -224,11 +224,49 @@ class _AppState extends State<App> {
     );
   }
 
+  BottomNavigationBarItem _bottomNavigationBarItem(
+      String iconName, String label) {
+    return BottomNavigationBarItem(
+      icon: SvgPicture.asset(
+        "assets/svg/$iconName.svg",
+        width: 22,
+      ),
+      label: label,
+    );
+  }
+
+  Widget _bottomNavigationBar() {
+    return BottomNavigationBar(
+      type: BottomNavigationBarType.fixed,
+      selectedItemColor: Colors.black,
+      selectedLabelStyle: const TextStyle(
+        color: Colors.black,
+        fontWeight: FontWeight.w600,
+      ),
+      onTap: (int index) {
+        if (kDebugMode) {
+          print("클릭됨 $index");
+        }
+        setState(() {
+          _currentPageIndex = index;
+        });
+      },
+      items: [
+        _bottomNavigationBarItem("home", "홈"),
+        _bottomNavigationBarItem("note", "동네생활"),
+        _bottomNavigationBarItem("location", "내근처"),
+        _bottomNavigationBarItem("chat", "채팅"),
+        _bottomNavigationBarItem("user", "나의당근"),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _appBar(),
       body: _bodyWidget(),
+      bottomNavigationBar: _bottomNavigationBar(),
     );
   }
 }
