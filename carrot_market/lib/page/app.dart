@@ -1,10 +1,7 @@
 import 'package:carrot_market/page/home.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:intl/intl.dart';
 
 class App extends StatefulWidget {
   const App({super.key});

@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 
@@ -12,6 +13,12 @@ class HomeWidget extends StatefulWidget {
 
 class _HomeWidgetState extends State<HomeWidget> {
   List<Map<String, String>> datas = [];
+  String _currentLocation = "ara";
+  final Map<String, String> locationMap = {
+    "ara": "아라동",
+    "ora": "오라동",
+    "donam": "도남동",
+  };
 
   @override
   void initState() {
@@ -99,11 +106,47 @@ class _HomeWidgetState extends State<HomeWidget> {
             print('클릭');
           }
         },
-        child: const Row(
-          children: [
-            Text('아라동'),
-            Icon(Icons.arrow_drop_down),
-          ],
+        child: PopupMenuButton<String>(
+          offset: const Offset(0, 25),
+          shape: ShapeBorder.lerp(
+            const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(10)),
+            ),
+            const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(10)),
+            ),
+            1,
+          ),
+          onSelected: (value) {
+            if (kDebugMode) {
+              print(value);
+            }
+            setState(() {
+              _currentLocation = value;
+            });
+          },
+          itemBuilder: (context) {
+            return [
+              const PopupMenuItem(
+                value: "ara",
+                child: Text("아라동"),
+              ),
+              const PopupMenuItem(
+                value: "ora",
+                child: Text("오라동"),
+              ),
+              const PopupMenuItem(
+                value: "donam",
+                child: Text("도남동"),
+              ),
+            ];
+          },
+          child: Row(
+            children: [
+              Text(locationMap[_currentLocation]!),
+              const Icon(Icons.arrow_drop_down),
+            ],
+          ),
         ),
       ),
       actions: [
@@ -180,7 +223,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                       ),
                       Text(
                         currencyFormat(datas[index]["price"]!),
-                        style: TextStyle(fontWeight: FontWeight.w500),
+                        style: const TextStyle(fontWeight: FontWeight.w500),
                       ),
                       Expanded(
                         child: Container(
