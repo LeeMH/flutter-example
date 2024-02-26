@@ -1,16 +1,16 @@
-# carrot_market
+# flutter 연습
 
-A new Flutter project.
+## [개발하는 남자 당근마켓 클론코딩](https://www.youtube.com/watch?v=wlF4KZNiTyU&list=PLgRxBCVPaZ_3R0h7mCkLJ1RKh7XRvoZdF&index=10)
 
-## Getting Started
+## 디렉토리 구성
 
-This project is a starting point for a Flutter application.
+### 1. 페이지
 
-A few resources to get you started if this is your first Flutter project:
+* 화면 하나단위를 페이지라 한다.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+* 화면 단위에서 각각 컴포넌트 구성은 메소드로 분리.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### 2. 컴포넌트(위젯)
+
+* 2개 이상의 화면에서 사용되면, 컴포넌트(위젯)으로 분리하여 사용
+
