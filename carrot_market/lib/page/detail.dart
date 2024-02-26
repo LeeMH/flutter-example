@@ -15,10 +15,30 @@ class DetailContentView extends StatefulWidget {
   State<DetailContentView> createState() => _DetailContentViewState();
 }
 
-class _DetailContentViewState extends State<DetailContentView> {
+class _DetailContentViewState extends State<DetailContentView>
+    with SingleTickerProviderStateMixin {
   late int size;
   late List<String> imgList;
   late int _current;
+  double scrollPositionToAlpha = 0;
+  ScrollController _scrollController = ScrollController();
+  late AnimationController _animationController;
+  late Animation _colorTween;
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(vsync: this);
+    _colorTween = ColorTween(begin: Colors.white, end: Colors.black)
+        .animate(_animationController);
+    _scrollController.addListener(() {
+      setState(() {
+        scrollPositionToAlpha =
+            (_scrollController.offset > 255) ? 255 : _scrollController.offset;
+        _animationController.value = scrollPositionToAlpha;
+      });
+    });
+  }
 
   @override
   void didChangeDependencies() {
@@ -34,33 +54,36 @@ class _DetailContentViewState extends State<DetailContentView> {
     _current = 0;
   }
 
+  Widget _makeIcon(IconData iconData) {
+    return AnimatedBuilder(
+      animation: _colorTween,
+      builder: (BuildContext context, Widget? child) {
+        return Icon(
+          iconData,
+          color: _colorTween.value,
+        );
+      },
+    );
+  }
+
   PreferredSizeWidget _appBar() {
     return AppBar(
-      backgroundColor: Colors.transparent,
+      backgroundColor: Colors.white.withAlpha(scrollPositionToAlpha.toInt()),
       elevation: 0,
       leading: IconButton(
         onPressed: () {
           Navigator.pop(context);
         },
-        icon: const Icon(
-          Icons.arrow_back,
-          color: Colors.white,
-        ),
+        icon: _makeIcon(Icons.arrow_back),
       ),
       actions: [
         IconButton(
           onPressed: () {},
-          icon: const Icon(
-            Icons.share,
-            color: Colors.white,
-          ),
+          icon: _makeIcon(Icons.share),
         ),
         IconButton(
           onPressed: () {},
-          icon: const Icon(
-            Icons.more,
-            color: Colors.white,
-          ),
+          icon: _makeIcon(Icons.more_vert),
         ),
       ],
     );
@@ -239,6 +262,7 @@ class _DetailContentViewState extends State<DetailContentView> {
 
   Widget _bodyWidget() {
     return CustomScrollView(
+      controller: _scrollController,
       slivers: [
         SliverList(
           delegate: SliverChildListDelegate(
