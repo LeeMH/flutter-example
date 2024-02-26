@@ -1,10 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:carrot_market/components/manner_temporature_widget.dart';
 import 'package:carrot_market/utils/data_utils.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 
 class DetailContentView extends StatefulWidget {
@@ -21,7 +19,7 @@ class _DetailContentViewState extends State<DetailContentView>
   late List<String> imgList;
   late int _current;
   double scrollPositionToAlpha = 0;
-  ScrollController _scrollController = ScrollController();
+  final ScrollController _scrollController = ScrollController();
   late AnimationController _animationController;
   late Animation _colorTween;
 
@@ -151,14 +149,14 @@ class _DetailContentViewState extends State<DetailContentView>
       padding: const EdgeInsets.all(15),
       child: Row(
         children: [
-          CircleAvatar(
+          const CircleAvatar(
             backgroundImage: AssetImage("assets/images/user.png"),
             radius: 20,
           ),
-          SizedBox(
+          const SizedBox(
             width: 10,
           ),
-          Column(
+          const Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
@@ -196,46 +194,46 @@ class _DetailContentViewState extends State<DetailContentView>
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Text(
             widget.data["title"]!,
-            style: TextStyle(
+            style: const TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 20,
             ),
           ),
-          Text(
+          const Text(
             "디지털/가전 * 22시간 전",
             style: TextStyle(
               color: Colors.grey,
               fontSize: 15,
             ),
           ),
-          SizedBox(height: 15),
-          Text(
+          const SizedBox(height: 15),
+          const Text(
             "선물받은 새상품이고\n상품 꺼내보기만 했습니다\n거래는 직거래만 합니다.",
             style: TextStyle(
               fontSize: 15,
               height: 1.5,
             ),
           ),
-          SizedBox(height: 15),
-          Text(
+          const SizedBox(height: 15),
+          const Text(
             "채팅 3, 관심 17, 조회 295",
             style: TextStyle(
               fontSize: 12,
               color: Colors.grey,
             ),
           ),
-          SizedBox(height: 15),
+          const SizedBox(height: 15),
         ],
       ),
     );
   }
 
   Widget _otherCellContents() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
+    return const Padding(
+      padding: EdgeInsets.symmetric(
         horizontal: 15,
       ),
       child: Row(
@@ -277,9 +275,9 @@ class _DetailContentViewState extends State<DetailContentView>
           ),
         ),
         SliverPadding(
-          padding: EdgeInsets.symmetric(horizontal: 15),
+          padding: const EdgeInsets.symmetric(horizontal: 15),
           sliver: SliverGrid(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               mainAxisSpacing: 5,
               crossAxisSpacing: 5,
@@ -295,11 +293,11 @@ class _DetailContentViewState extends State<DetailContentView>
                         color: Colors.red,
                       ),
                     ),
-                    Text(
+                    const Text(
                       "상품 제목",
                       style: TextStyle(fontSize: 14),
                     ),
-                    Text(
+                    const Text(
                       "금액",
                       style: TextStyle(fontWeight: FontWeight.bold),
                     )
@@ -315,7 +313,7 @@ class _DetailContentViewState extends State<DetailContentView>
 
   Widget _bottomNavigationBar() {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 15),
+      padding: const EdgeInsets.symmetric(horizontal: 15),
       width: size.toDouble(),
       height: 55,
       child: Row(
@@ -333,7 +331,7 @@ class _DetailContentViewState extends State<DetailContentView>
             ),
           ),
           Container(
-            margin: EdgeInsets.symmetric(horizontal: 15),
+            margin: const EdgeInsets.symmetric(horizontal: 15),
             width: 1,
             height: 40,
             color: Colors.grey.withOpacity(0.3),
@@ -342,12 +340,12 @@ class _DetailContentViewState extends State<DetailContentView>
             children: [
               Text(
                 DataUtils.currencyFormat(widget.data["price"]!),
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              Text(
+              const Text(
                 "가격제안불가",
                 style: TextStyle(
                   fontSize: 14,
@@ -361,12 +359,12 @@ class _DetailContentViewState extends State<DetailContentView>
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 7),
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 7),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5),
-                    color: Color(0xfff08f4f),
+                    color: const Color(0xfff08f4f),
                   ),
-                  child: Text(
+                  child: const Text(
                     "채팅으로 거래하기",
                     style: TextStyle(
                       color: Colors.white,

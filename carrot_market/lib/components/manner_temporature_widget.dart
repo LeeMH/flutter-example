@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class MannerTemperatureWidget extends StatelessWidget {
   final double mannerTemp;
@@ -35,7 +33,7 @@ class MannerTemperatureWidget extends StatelessWidget {
   }
 
   Widget _makeTempLableAndBar() {
-    return Container(
+    return SizedBox(
       width: 65,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -81,7 +79,7 @@ class MannerTemperatureWidget extends StatelessWidget {
               SizedBox(
                 width: 30,
                 height: 30,
-                child: Image.asset("assets/images/level-${_level}.jpg"),
+                child: Image.asset("assets/images/level-$_level.jpg"),
               )
             ],
           ),
