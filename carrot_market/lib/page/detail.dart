@@ -1,7 +1,11 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:carrot_market/components/manner_temporature_widget.dart';
+import 'package:carrot_market/utils/data_utils.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_svg/svg.dart';
 
 class DetailContentView extends StatefulWidget {
   final Map<String, String> data;
@@ -287,9 +291,71 @@ class _DetailContentViewState extends State<DetailContentView> {
 
   Widget _bottomNavigationBar() {
     return Container(
+      padding: EdgeInsets.symmetric(horizontal: 15),
       width: size.toDouble(),
       height: 55,
-      color: Colors.red,
+      child: Row(
+        children: [
+          GestureDetector(
+            onTap: () {
+              if (kDebugMode) {
+                print("관심상품 이벤트 발생");
+              }
+            },
+            child: SvgPicture.asset(
+              "assets/svg/heart_off.svg",
+              width: 25,
+              height: 25,
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 15),
+            width: 1,
+            height: 40,
+            color: Colors.grey.withOpacity(0.3),
+          ),
+          Column(
+            children: [
+              Text(
+                DataUtils.currencyFormat(widget.data["price"]!),
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Text(
+                "가격제안불가",
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Colors.grey,
+                ),
+              ),
+            ],
+          ),
+          Expanded(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 7),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                    color: Color(0xfff08f4f),
+                  ),
+                  child: Text(
+                    "채팅으로 거래하기",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
     );
   }
 
