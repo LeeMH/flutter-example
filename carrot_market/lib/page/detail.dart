@@ -15,6 +15,7 @@ class DetailContentView extends StatefulWidget {
 
 class _DetailContentViewState extends State<DetailContentView>
     with SingleTickerProviderStateMixin {
+  final ScaffoldKey = GlobalKey<ScaffoldState>();
   late int size;
   late List<String> imgList;
   late int _current;
@@ -22,6 +23,7 @@ class _DetailContentViewState extends State<DetailContentView>
   final ScrollController _scrollController = ScrollController();
   late AnimationController _animationController;
   late Animation _colorTween;
+  late bool isFavorite;
 
   @override
   void initState() {
@@ -36,6 +38,7 @@ class _DetailContentViewState extends State<DetailContentView>
         _animationController.value = scrollPositionToAlpha;
       });
     });
+    isFavorite = false;
   }
 
   @override
@@ -320,14 +323,18 @@ class _DetailContentViewState extends State<DetailContentView>
         children: [
           GestureDetector(
             onTap: () {
-              if (kDebugMode) {
-                print("관심상품 이벤트 발생");
-              }
+              setState(() {
+                isFavorite = !isFavorite;
+              });
             },
             child: SvgPicture.asset(
-              "assets/svg/heart_off.svg",
+              isFavorite
+                  ? "assets/svg/heart_off.svg"
+                  : "assets/svg/heart_on.svg",
               width: 25,
               height: 25,
+              colorFilter:
+                  const ColorFilter.mode(Colors.orange, BlendMode.srcIn),
             ),
           ),
           Container(
@@ -359,7 +366,8 @@ class _DetailContentViewState extends State<DetailContentView>
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 7),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 7),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5),
                     color: const Color(0xfff08f4f),
@@ -384,6 +392,7 @@ class _DetailContentViewState extends State<DetailContentView>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: ScaffoldKey,
       extendBodyBehindAppBar: true,
       appBar: _appBar(),
       body: _bodyWidget(),
