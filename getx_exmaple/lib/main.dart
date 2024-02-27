@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:getx_exmaple/page/argument.dart';
 import 'package:getx_exmaple/page/argument2.dart';
