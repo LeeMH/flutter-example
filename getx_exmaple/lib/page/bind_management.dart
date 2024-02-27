@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:getx_exmaple/controller/reactive_count_controller.dart';
+import 'package:getx_exmaple/controller/count_controller.dart';
 
-class ReactiveStatePage extends StatelessWidget {
-  const ReactiveStatePage({super.key});
+class BindManagementPage extends StatelessWidget {
+  const BindManagementPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Reactive 상태 관리 페이지'),
+        title: const Text('단순상태 관리 페이지'),
       ),
       body: Center(
         child: Column(
@@ -20,17 +20,20 @@ class ReactiveStatePage extends StatelessWidget {
                 fontSize: 30,
               ),
             ),
-            Obx(
-              () => Text(
-                '${Get.find<ReactiveCountController>().count.value}',
-                style: const TextStyle(
-                  fontSize: 30,
-                ),
-              ),
+            GetBuilder<CountController>(
+              builder: (controller) {
+                return Text(
+                  '${controller.count}',
+                  style: const TextStyle(
+                    fontSize: 30,
+                  ),
+                );
+              },
             ),
             ElevatedButton(
               onPressed: () {
-                Get.find<ReactiveCountController>().increase();
+                //Get.find<CountController>().increase();
+                CountController.to.increase();
               },
               child: const Text(
                 '+',

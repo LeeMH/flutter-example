@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:getx_exmaple/controller/count_controller.dart';
+import 'package:getx_exmaple/controller/reactive_count_controller.dart';
 import 'package:getx_exmaple/page/argument.dart';
 import 'package:getx_exmaple/page/argument2.dart';
+import 'package:getx_exmaple/page/bind_management.dart';
 import 'package:getx_exmaple/page/first_named.dart';
 import 'package:getx_exmaple/page/home.dart';
 import 'package:getx_exmaple/page/second_named.dart';
@@ -18,6 +21,9 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    Get.put(CountController());
+    Get.put(ReactiveCountController());
+
     return GetMaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -57,6 +63,14 @@ class MyApp extends StatelessWidget {
           name: "/url_parameter/:uid",
           page: () => const UrlParameter(),
           transition: Transition.leftToRight,
+        ),
+        GetPage(
+          name: "/binding",
+          page: () => const BindManagementPage(),
+          transition: Transition.leftToRight,
+          binding: BindingsBuilder(() {
+            Get.put(CountController());
+          }),
         ),
       ],
     );

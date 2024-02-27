@@ -7,8 +7,6 @@ class SimpleStatePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(CountController());
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('단순상태 관리 페이지'),

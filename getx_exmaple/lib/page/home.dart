@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getx_exmaple/page/First.dart';
+import 'package:getx_exmaple/page/bind_management.dart';
 import 'package:getx_exmaple/page/reactive_state.dart';
 import 'package:getx_exmaple/page/simple_state.dart';
 
@@ -49,6 +50,12 @@ class Home extends StatelessWidget {
               child: const Text('Reactive 상태 관리'),
               onPressed: () {
                 Get.to(() => const ReactiveStatePage());
+              },
+            ),
+            ElevatedButton(
+              child: const Text('Binding 관리'),
+              onPressed: () {
+                Get.to(() => const BindManagementPage());
               },
             ),
           ],
