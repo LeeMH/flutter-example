@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getx_exmaple/page/First.dart';
+import 'package:getx_exmaple/page/simple_state.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -35,6 +36,12 @@ class Home extends StatelessWidget {
               child: const Text('Named 라우트'),
               onPressed: () {
                 Get.toNamed("/first");
+              },
+            ),
+            ElevatedButton(
+              child: const Text('단순상태 관리'),
+              onPressed: () {
+                Get.to(() => SimpleStatePage());
               },
             ),
           ],
